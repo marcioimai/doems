@@ -10,7 +10,7 @@ GITHUB_REPO="git@github.com:marcioimai/doems.git"
 echo "Atualizando o sistema e instalando dependências..."
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y python3 python3-pip git
-sudo apt install python3-requests python3-bs4 python3-lxml -y
+# sudo apt install -y python3-requests python3-bs4 python3-lxml python3-pypdf2 python3-selenium python3-webdriver-manager
 
 # Cria o diretório para o script
 echo "Criando diretório para o script..."
@@ -22,6 +22,12 @@ echo "Clonando o repositório do GitHub..."
 cd $SCRIPT_DIR
 git clone $GITHUB_REPO .
 ############################## até aqui ok ##############################
+
+# Cria o ambiente virtual e instala as dependências
+echo "Criando o ambiente virtual e instalando as dependências..."
+python3 -m venv $SCRIPT_DIR/venv
+source $SCRIPT_DIR/venv/bin/activate
+pip install requests beautifulsoup4 lxml pypdf2 selenium webdriver_manager resend
 
 # Cria o arquivo de serviço systemd
 echo "Criando o serviço systemd..."
